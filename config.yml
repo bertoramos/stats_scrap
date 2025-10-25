@@ -1,0 +1,8 @@
+retry_attempts: 3
+timeout_seconds: 15
+
+# URLs to scrape
+# list of types: ISTAC_SURVEY
+urls:
+  - type: ISTAC_SURVEY
+    url: http://demo.example

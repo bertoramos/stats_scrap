@@ -24,7 +24,9 @@ data/output/
 *.csv
 *.xlsx
 *.json
+*.html
 
 # Config files with secrets
 .config
 *.yaml
+trash
