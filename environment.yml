@@ -8,10 +8,11 @@ dependencies:
   - brotli-python=1.1.0=py313hfe59770_4
   - bzip2=1.0.8=h2bbff1b_6
   - ca-certificates=2025.10.5=h4c7d964_0
-  - certifi=2025.10.5=py313haa95532_0
+  - certifi=2025.10.5=pyhd8ed1ab_0
   - cffi=2.0.0=py313h5ea7bf4_1
   - charset-normalizer=3.4.4=pyhd8ed1ab_0
   - colorama=0.4.6=py313haa95532_0
+  - et_xmlfile=2.0.0=pyhd8ed1ab_1
   - expat=2.7.1=h8ddb27b_0
   - h2=4.3.0=pyhcf101f3_0
   - hpack=4.1.0=pyhd8ed1ab_0
@@ -31,6 +32,7 @@ dependencies:
   - mkl=2024.2.2=h57928b3_16
   - nodejs=24.9.0=he453025_0
   - numpy=2.3.4=py313hce7ae62_0
+  - openpyxl=3.1.5=py313hc624790_2
   - openssl=3.5.4=h725018a_0
   - pandas=2.3.3=py313hc90dcd4_1
   - pycparser=2.22=pyh29332c3_1
