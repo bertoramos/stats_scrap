@@ -27,3 +27,4 @@ data/output/
 
 # Config files with secrets
 .config
+*.yaml

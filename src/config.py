@@ -1,22 +1,25 @@
-
-from pydantic import HttpUrl
-from pydantic_settings import BaseSettings # NEW
+import yaml
+from pydantic import BaseModel, HttpUrl
+from typing import Literal, List
 from functools import lru_cache
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-ENV_PATH = os.path.join(BASE_DIR, ".config")
+CONFIG_PATH = os.path.join(BASE_DIR, "config.yaml")
 
-class Settings(BaseSettings):
-    source_url: HttpUrl = "http://empty.none"
-    retry_attempts: int = -1
-    timeout_seconds: int = -1
+# Modelo para cada URL
+class URLItem(BaseModel):
+    type: Literal["ISTAC_SURVEY"]
+    url: HttpUrl
 
-    class Config:
-        env_file = ENV_PATH
-        env_file_encoding = "utf-8"
+# Modelo principal
+class Settings(BaseModel):
+    retry_attempts: int
+    timeout_seconds: int
+    urls: List[URLItem]
 
-# Cargamos solo una vez, como un singleton
 @lru_cache
 def get_settings():
-    return Settings()
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    return Settings(**data)
