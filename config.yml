@@ -1,6 +1,7 @@
 debug: true
 retry_attempts: 3
 timeout_seconds: 15
+output_folder: data/output
 
 # URLs to scrape
 # list of types: ISTAC_SURVEY
