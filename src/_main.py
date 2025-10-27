@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import os
+import traceback
 from tqdm import tqdm
 
 from config import get_settings
@@ -42,7 +43,9 @@ def main():
     logging.info(f"URLs configuradas: {settings.urls}")
     logging.info(f"Intentos de reintento: {settings.retry_attempts}")
     logging.info(f"Timeout: {settings.timeout_seconds} segundos")
-    
+
+    output_dir = Path(settings.output_folder) / datetime.now().strftime("%H-%M-%S_%Y-%m-%d")
+    output_dir.mkdir(parents=True, exist_ok=True)
     
     # Procesar URLs con barra de progreso
     for url in tqdm(settings.urls, desc="Procesando URLs", unit="url"):
@@ -54,15 +57,18 @@ def main():
         content = fetch_page_content(url_str)
         if content:
             title, df = scrape_data(content, url.type)
-            save_dataframe(title, df)
+            save_dataframe(title, df, output_dir=output_dir)
             tqdm.write(f"✅ Datos scrappeados para {url_str}")
         
         else:
             logging.error(f"No se pudo obtener contenido para la URL: {url_str}")
             tqdm.write(f"❌ Error procesando: {url_str}")
+        
+        
     
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
         logging.error(f"Error inesperado: {e}")
+        logging.error(f"Traceback completo:\n{traceback.format_exc()}")

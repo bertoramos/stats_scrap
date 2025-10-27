@@ -2,7 +2,7 @@ import re
 from tqdm import tqdm
 
 from bs4 import BeautifulSoup
-from request_handler import fetch_page_content
+from request_handler import fetch_page_content, get_settings
 import pandas as pd
 
 def scrap_datasets(href):
@@ -80,6 +80,10 @@ def istac_survey_scrapper(soup):
             "datasets": datasets # [(dataset_title, dataset_href), ...]
         })
 
+        setts = get_settings()
+        if setts.debug:
+            break
+    
     survey_data = {"title": soup.title.string if soup.title else "No title", "survey": survey_list}
 
     return convert_to_dataframe(survey_data)

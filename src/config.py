@@ -17,6 +17,7 @@ class Settings(BaseModel):
     debug: bool
     retry_attempts: int
     timeout_seconds: int
+    output_folder: str
     urls: List[URLItem]
 
 @lru_cache
