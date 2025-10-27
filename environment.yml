@@ -41,6 +41,7 @@ dependencies:
   - pydantic-settings=2.11.0=pyh3cfb1c2_0
   - pysocks=1.7.1=pyh09c184e_7
   - python=3.13.9=h260b955_100_cp313
+  - pip
   - python-dateutil=2.9.0.post0=pyhe01879c_2
   - python-dotenv=1.1.1=pyhe01879c_0
   - python-tzdata=2025.2=pyhd8ed1ab_0
@@ -76,4 +77,3 @@ dependencies:
       - pip==25.3
       - playwright==1.55.0
       - pyee==13.0.0
-prefix: D:\python\stats_scrap\.env
