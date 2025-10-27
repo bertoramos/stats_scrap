@@ -14,6 +14,7 @@ class URLItem(BaseModel):
 
 # Modelo principal
 class Settings(BaseModel):
+    debug: bool
     retry_attempts: int
     timeout_seconds: int
     urls: List[URLItem]

@@ -12,7 +12,7 @@ def fetch_page_content(url: str) -> str:
     settings = get_settings()
     retry_attempts = settings.retry_attempts
     timeout_seconds = settings.timeout_seconds
-
+    
     for attempt in range(retry_attempts):
         try:
             with sync_playwright() as p:

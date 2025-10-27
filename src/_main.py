@@ -8,17 +8,18 @@ from config import get_settings
 from request_handler import fetch_page_content
 from scrapper import scrape_data
 from save_data import save_dataframe
+from pathlib import Path
 
 def setup_logging():
     """Configura el logging con timestamp en el nombre del archivo"""
     # Crear directorio de logs si no existe
-    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'log')
-    os.makedirs(log_dir, exist_ok=True)
+    log_dir = Path(__file__).parent.parent / 'log'
+    log_dir.mkdir(exist_ok=True, parents=True)
     
     # Generar nombre de archivo con timestamp
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     log_filename = f'stats_scrap_{timestamp}.log'
-    log_path = os.path.join(log_dir, log_filename)
+    log_path = log_dir / log_filename
     
     # Configurar logging
     logging.basicConfig(
