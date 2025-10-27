@@ -59,12 +59,10 @@ def main():
             title, df = scrape_data(content, url.type)
             save_dataframe(title, df, output_dir=output_dir)
             tqdm.write(f"✅ Datos scrappeados para {url_str}")
-        
         else:
             logging.error(f"No se pudo obtener contenido para la URL: {url_str}")
             tqdm.write(f"❌ Error procesando: {url_str}")
-        
-        
+
     
 if __name__ == "__main__":
     try:

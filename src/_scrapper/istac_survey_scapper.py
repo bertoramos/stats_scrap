@@ -25,9 +25,11 @@ def scrap_multidataset(href):
     for anchor in tqdm(dataset_anchors, desc="Procesando datasets", leave=False, disable=len(dataset_anchors)<=1):
         dataset_title = re.sub(r'\s+', ' ', anchor['title']).strip()
         dataset_href = anchor['href']
-        
-        multidataset.append((dataset_title, dataset_href))
-    
+        dataset_resourceid = re.search(r'resourceId=([^&]+)', dataset_href)
+        dataset_resourceid_value = dataset_resourceid.group(1) if dataset_resourceid else "No resourceId"
+
+        multidataset.append((dataset_title, dataset_href, dataset_resourceid_value))
+
     return multidataset
 
 def convert_to_dataframe(survey_data):
@@ -41,18 +43,20 @@ def convert_to_dataframe(survey_data):
     for multidataset in survey_multidatasets:
         multidataset_title = multidataset.get("title", "No title")
         multidataset_href = multidataset.get("href", "No href")
+
         if multidataset.get("datasets"):
             # If dataset has sub-datasets, create one row per sub-dataset
-            for dataset_title, dataset_href in multidataset["datasets"]:
+            for dataset_title, dataset_href, dataset_resourceid_value in multidataset["datasets"]:
                 rows.append({
                     "multidataset_title": multidataset_title,
                     "multidataset_href": multidataset_href,
                     "dataset_title": dataset_title,
-                    "dataset_href": dataset_href
+                    "dataset_href": dataset_href,
+                    "dataset_resourceid": dataset_resourceid_value
                 })
     
     df = pd.DataFrame(rows)
-
+    
     return survey_title, df
 
 def istac_survey_scrapper(soup):
