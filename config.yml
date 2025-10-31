@@ -1,4 +1,4 @@
-debug: true
+debug: false
 retry_attempts: 3
 timeout_seconds: 15
 output_folder: data/output
